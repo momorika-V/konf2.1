@@ -814,7 +814,6 @@ def render_diagram_png(edges, root, path):
     draw_arrows(canvas, positions, edges, node_width)
     draw_nodes(canvas, positions, node_width)
     canvas.save(path)
-    """ Точка входа CLI-приложения"""
 
 
 def build_source(config):
