@@ -24,15 +24,12 @@ EXIT_OK = 0
 EXIT_ERROR = 1
 
 STATE_NEW = 0
-""" Единые состояния раскраски вершин для всех обходов графа: """
 STATE_OPEN = 1
-""" DFS построения графа, поиска циклов и порядка загрузки. """
 STATE_CLOSED = 2
 
 
 DEFAULT_FILTER = ""
 PNG_EXTENSION = ".png"
-""" Этап 1. Конфигурация командной строки """
 
 
 class ConfigError(Exception):
@@ -172,7 +169,6 @@ NAME_LEN_DOUBLE = 2
 NAME_LEN_TRIPLE = 3
 USER_AGENT = "dep-graph-visualizer"
 MAX_LISTED_VERSIONS = 20
-""" Этап 2. Сбор данных из sparse-индекса Cargo"""
 
 
 class CargoIndexError(Exception):
@@ -290,7 +286,6 @@ class CargoIndex:
 
 SEPARATOR = ":"
 COMMENT_PREFIX = "#"
-""" Этап 3. Тестовый репозиторий и граф зависимостей"""
 
 
 class TestRepoError(Exception):
@@ -445,7 +440,6 @@ def build_dependency_graph(source, root, version, filter_substring):
     )
     warnings = find_cycles(edges)
     return edges, warnings
-    """ Этап 4. Порядок загрузки зависимостей"""
 
 
 def iter_neighbours(edges, package):
@@ -492,7 +486,6 @@ def get_load_order(edges, root):
 START_MARKER = "@startuml"
 END_MARKER = "@enduml"
 INDENT = "  "
-"""Этап 5. Визуализация: PlantUML, шрифт, холст, PNG, компоновка"""
 
 
 def format_edge(source, target):
