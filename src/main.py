@@ -23,16 +23,16 @@ import zlib
 EXIT_OK = 0
 EXIT_ERROR = 1
 
-""" Единые состояния раскраски вершин для всех обходов графа: """
-""" DFS построения графа, поиска циклов и порядка загрузки. """
 STATE_NEW = 0
+""" Единые состояния раскраски вершин для всех обходов графа: """
 STATE_OPEN = 1
+""" DFS построения графа, поиска циклов и порядка загрузки. """
 STATE_CLOSED = 2
 
 
-""" Этап 1. Конфигурация командной строки """
 DEFAULT_FILTER = ""
 PNG_EXTENSION = ".png"
+""" Этап 1. Конфигурация командной строки """
 
 
 class ConfigError(Exception):
@@ -164,7 +164,6 @@ def print_config(config):
         print(f"{key} = {value}")
 
 
-""" Этап 2. Сбор данных из sparse-индекса Cargo"""
 DEFAULT_INDEX_URL = "https://index.crates.io"
 HTTP_TIMEOUT_SECONDS = 30
 NORMAL_KINDS = (None, "normal")
@@ -173,6 +172,7 @@ NAME_LEN_DOUBLE = 2
 NAME_LEN_TRIPLE = 3
 USER_AGENT = "dep-graph-visualizer"
 MAX_LISTED_VERSIONS = 20
+""" Этап 2. Сбор данных из sparse-индекса Cargo"""
 
 
 class CargoIndexError(Exception):
@@ -288,9 +288,9 @@ class CargoIndex:
         return extract_direct_deps(entry)
 
 
-""" Этап 3. Тестовый репозиторий и граф зависимостей"""
 SEPARATOR = ":"
 COMMENT_PREFIX = "#"
+""" Этап 3. Тестовый репозиторий и граф зависимостей"""
 
 
 class TestRepoError(Exception):
@@ -445,9 +445,9 @@ def build_dependency_graph(source, root, version, filter_substring):
     )
     warnings = find_cycles(edges)
     return edges, warnings
+    """ Этап 4. Порядок загрузки зависимостей"""
 
 
-""" Этап 4. Порядок загрузки зависимостей"""
 def iter_neighbours(edges, package):
     """Вернуть соседей пакета в отсортированном (стабильном) порядке."""
     return sorted(edges.get(package, []))
@@ -489,10 +489,10 @@ def get_load_order(edges, root):
     ]
 
 
-"""Этап 5. Визуализация: PlantUML, шрифт, холст, PNG, компоновка"""
 START_MARKER = "@startuml"
 END_MARKER = "@enduml"
 INDENT = "  "
+"""Этап 5. Визуализация: PlantUML, шрифт, холст, PNG, компоновка"""
 
 
 def format_edge(source, target):
@@ -821,9 +821,9 @@ def render_diagram_png(edges, root, path):
     draw_arrows(canvas, positions, edges, node_width)
     draw_nodes(canvas, positions, node_width)
     canvas.save(path)
+    """ Точка входа CLI-приложения"""
 
 
-""" Точка входа CLI-приложения"""
 def build_source(config):
     """Создать источник данных о зависимостях по конфигурации."""
     if config.test_mode:
